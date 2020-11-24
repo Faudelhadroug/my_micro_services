@@ -2,25 +2,45 @@ const express = require('express');
 
 const router = express.Router();
 const Cdiscussion = require('../controllers/discussion.controller');
-
+const validator = require('../util/validator');
 // Create
-router.route('/create').post((req, res) => {
-    console.log('create');
+router.route('/create').post(validator.create, (req, res) => {
+    let response = Cdiscussion.createDiscussion(req.body);
+    res.send(response)
 });
 
 // Read
-router.route('/get').get((req, res) => {
-    console.log('get');
-    Cdiscussion.findDiscussion();
+router.route('/find').get(async (req, res) => {
+    if(req.body.id){
+        let response = await Cdiscussion.findDiscussionById(req.body.id);
+        console.log(response)
+        res.send(response);
+    } else {
+        let response = await Cdiscussion.findDiscussion();
+        console.log(response)
+        res.send(response);
+    }
 });
 
 // Update
-router.route('/update').put((req, res) => {
+router.route('/update').put(validator.update, (req, res) => {
+    if(req.body.id){
+        Cdiscussion.updateDiscussion(req.body.id);
+    }
+    else {
+        res.send('id not found')
+    }
     console.log('update');
 });
 
 // Delete
 router.route('/delete').delete((req, res) => {
+    if(req.body.id) {
+        Cdiscussion.updateDiscussion(req.body.id);
+    } 
+    else {
+        res.send('id not found')
+    }
     console.log('delete');
 });
 
