@@ -11,9 +11,9 @@ router.route('/create').post(validator.create, (req, res) => {
 
 // Read
 router.route('/find').get(async (req, res) => {
+    console.log(req.body)
     if(req.body.id){
         let response = await Cdiscussion.findDiscussionById(req.body.id);
-        console.log(response)
         res.send(response);
     } else {
         let response = await Cdiscussion.findDiscussion();
@@ -25,7 +25,8 @@ router.route('/find').get(async (req, res) => {
 // Update
 router.route('/update').put(validator.update, (req, res) => {
     if(req.body.id){
-        Cdiscussion.updateDiscussion(req.body.id);
+        Cdiscussion.updateDiscussion(req.body);
+        res.send('Discussion correctly updated');
     }
     else {
         res.send('id not found')
@@ -36,10 +37,11 @@ router.route('/update').put(validator.update, (req, res) => {
 // Delete
 router.route('/delete').delete((req, res) => {
     if(req.body.id) {
-        Cdiscussion.updateDiscussion(req.body.id);
+        Cdiscussion.deleteDiscussion(req.body.id);
+        res.send('Discussion correctly deleted');
     } 
     else {
-        res.send('id not found')
+        res.send('id not found');
     }
     console.log('delete');
 });

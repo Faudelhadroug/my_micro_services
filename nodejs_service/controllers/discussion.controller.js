@@ -5,7 +5,6 @@ module.exports = {
         const discussion = new Discussion({
             name: name,
             users: users,
-            messages:  messages,
             createdAt: new Date()
         });
         discussion.save()
@@ -26,11 +25,12 @@ module.exports = {
         Discussion.findById(id)
         .then((discussion) => {
             discussion.users = users;
+            return discussion.save();
         })
         .catch(err => err)
         console.log('update disscusion');
     },
-    deleteDiscussion: () => {
+    deleteDiscussion: (id) => {
         let reponse = Discussion.findByIdAndRemove(id)
         .then(() => { return 'discussion deleted' })
         .catch(error => 'Id not found');

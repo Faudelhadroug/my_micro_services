@@ -7,7 +7,7 @@ const port = 3100;
 
 const router = require('./routes/discussion.route')
 
-let dev_db_url = 'mongodb+srv://root:root@test.6q70q.mongodb.net/micro_service?retryWrites=true&w=majority';
+let dev_db_url = 'mongodb+srv://root:root@nordine-cluster.8xz6d.mongodb.net/micro_service?retryWrites=true&w=majority';
 let mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, {
     useNewUrlParser: true,
