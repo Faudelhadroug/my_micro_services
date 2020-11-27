@@ -42,7 +42,8 @@ $router->get('/users', function (Request $request) use ($router) {
 });
 
 $router->post('/message', function (Request $request) use ($router) {
-    return Http::withToken($request->header('token'))->post('http://localhost:8001/message',[
+    return Http::withToken($request->header('token'))->post('http://localhost:8001/message',
+    [
         'content' => $request->content,
         'discussion_id' => $request->discussion_id
     ]);
@@ -53,7 +54,8 @@ $router->get('/message/{id}', function (Request $request) use ($router) {
 });
 
 $router->put('/message/{id}', function (Request $request) use ($router) {
-    return Http::withToken($request->header('token'))->put('http://localhost:8001/message/'.$request->id,[
+    return Http::withToken($request->header('token'))->put('http://localhost:8001/message/'.$request->id, 
+    [
         'content' => $request->content,
         'discussion_id' => $request->discussion_id
     ]);

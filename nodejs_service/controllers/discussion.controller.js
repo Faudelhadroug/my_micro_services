@@ -1,15 +1,15 @@
 const Discussion = require('../models/discussion.model');
 
 module.exports = {
-    createDiscussion: ({name, users, messages}) => {
+    createDiscussion: ({name, users}) => {
         const discussion = new Discussion({
             name: name,
             users: users,
             createdAt: new Date()
         });
         discussion.save()
-        .then(result => { return 'created discussion'; })
         .catch(error => `error ${error.message}`);
+        return discussion;
     },
     findDiscussion: () => {
         let reponse = Discussion.find().then(discussions => { return discussions; });

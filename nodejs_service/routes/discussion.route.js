@@ -4,8 +4,8 @@ const router = express.Router();
 const Cdiscussion = require('../controllers/discussion.controller');
 const validator = require('../util/validator');
 // Create
-router.route('/create').post(validator.create, (req, res) => {
-    let response = Cdiscussion.createDiscussion(req.body);
+router.route('/create').post(validator.create, async (req, res) => {
+    let response = await Cdiscussion.createDiscussion(req.body);
     res.send(response)
 });
 
